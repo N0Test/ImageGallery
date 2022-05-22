@@ -123,5 +123,12 @@ namespace ImageGallery.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+
+        public async Task<IActionResult> Download(string fileName)
+        {
+            var file = await _blobService.GetFile(fileName);
+
+            return File(file.Bytes, file.ContentType, file.Name);
+        }
     }
 }

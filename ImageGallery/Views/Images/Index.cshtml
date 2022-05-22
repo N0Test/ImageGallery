@@ -27,6 +27,9 @@
     </div>
 </div>
 <div class="row">
-    @Html.ActionLink("Delete", "Delete", new {  id = Model.Id  }) |
-    <a asp-action="Index" asp-controller="Home">Back to List</a>
+    <div class="col">
+        @Html.ActionLink("Download", "Download", new {  fileName = Model.Url  }) |
+        @Html.ActionLink("Delete", "Delete", new {  id = Model.Id  }) |
+        <a asp-action="Index" asp-controller="Home">Back to List</a>
+    </div>
 </div>

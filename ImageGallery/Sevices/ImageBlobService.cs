@@ -32,7 +32,7 @@ namespace ImageGallery.Sevices
         {
             byte[] bytes;
 
-            using (FileStream fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+            using (FileStream fileStream = new FileStream(_appEnvironment.WebRootPath + fileName, FileMode.Open, FileAccess.Read))
             {
                 using (MemoryStream memoryStream = new MemoryStream())
                 {
