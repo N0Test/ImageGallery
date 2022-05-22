@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ImageGallery.Models.TagModel>
+
+@{
+    ViewData["Title"] = "Edit image tags";
+    var image = (ImageModel)ViewData["Image"];
+}
+
+<h1>Edit image tags</h1>
+<form asp-action="Edit" method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Use
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                   <input type="checkbox" value="@item.Id" name="tags" 
+                    @if(image.Tags.Any(tag => tag.Id == item.Id)) {
+                            @Html.Display("checked")
+                    }/>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>
+@Html.ActionLink("Go back", "Index", new { id=image.Id })

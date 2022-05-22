@@ -18,6 +18,21 @@ namespace ImageGallery.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("ImageEntityTagEntity", b =>
+                {
+                    b.Property<int>("ImagesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TagsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ImagesId", "TagsId");
+
+                    b.HasIndex("TagsId");
+
+                    b.ToTable("ImageEntityTagEntity");
+                });
+
             modelBuilder.Entity("ImageGallery.DAL.Entities.ImageEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -41,33 +56,6 @@ namespace ImageGallery.Migrations
                             Id = 1,
                             Name = "Palm trees",
                             Url = "https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg"
-                        });
-                });
-
-            modelBuilder.Entity("ImageGallery.DAL.Entities.ImageInTagEntity", b =>
-                {
-                    b.Property<int>("ImageId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TagId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ImageId", "TagId");
-
-                    b.HasIndex("TagId");
-
-                    b.ToTable("ImageTags");
-
-                    b.HasData(
-                        new
-                        {
-                            ImageId = 1,
-                            TagId = 1
-                        },
-                        new
-                        {
-                            ImageId = 1,
-                            TagId = 2
                         });
                 });
 
@@ -156,23 +144,19 @@ namespace ImageGallery.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ImageGallery.DAL.Entities.ImageInTagEntity", b =>
+            modelBuilder.Entity("ImageEntityTagEntity", b =>
                 {
-                    b.HasOne("ImageGallery.DAL.Entities.ImageEntity", "Image")
-                        .WithMany("ImageInTags")
-                        .HasForeignKey("ImageId")
+                    b.HasOne("ImageGallery.DAL.Entities.ImageEntity", null)
+                        .WithMany()
+                        .HasForeignKey("ImagesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ImageGallery.DAL.Entities.TagEntity", "Tag")
-                        .WithMany("ImageInTags")
-                        .HasForeignKey("TagId")
+                    b.HasOne("ImageGallery.DAL.Entities.TagEntity", null)
+                        .WithMany()
+                        .HasForeignKey("TagsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Image");
-
-                    b.Navigation("Tag");
                 });
 
             modelBuilder.Entity("ImageGallery.DAL.Entities.UserEntity", b =>
@@ -184,16 +168,6 @@ namespace ImageGallery.Migrations
                         .IsRequired();
 
                     b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("ImageGallery.DAL.Entities.ImageEntity", b =>
-                {
-                    b.Navigation("ImageInTags");
-                });
-
-            modelBuilder.Entity("ImageGallery.DAL.Entities.TagEntity", b =>
-                {
-                    b.Navigation("ImageInTags");
                 });
 #pragma warning restore 612, 618
         }

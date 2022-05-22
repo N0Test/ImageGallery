@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace ImageGallery.DAL.Entities
+namespace ImageGallery.Models
 {
-    public class ImageEntity
+    [DisplayColumn("Name")]
+    public class ImageModel
     {
-        [Key]
         public int Id { get; set; }
         public string Url { get; set; }
+        [DisplayName("Image Name")]
         public string Name { get; set; }
-
-        public virtual IList<TagEntity> Tags { get; set; } = new List<TagEntity>();
+        public IList<TagModel> Tags { get; set; }
     }
 }

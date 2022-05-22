@@ -1,4 +1,6 @@
 using ImageGallery.DAL;
+using ImageGallery.Models;
+using ImageGallery.Sevices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,6 +31,11 @@ namespace ImageGallery
 
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(connectionString));
+
+            services.AddScoped<ICRUDService<ImageModel>, ImageService>();
+            services.AddScoped<IImageBlobService, ImageBlobService>();
+            services.AddScoped<IImageSearchService, ImageSearchService>();
+            services.AddScoped<ICRUDService<TagModel>, TagService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,7 +67,7 @@ namespace ImageGallery
                 endpoints.MapControllerRoute(
                     name: "adminPanel",
                     pattern: "admin/{article?}"
-                    //defaults: new { controller = "login", action = "index" }
+                    //defaults: new { controller = "Image", action = "AddImage" }
                     );
             });
         }

@@ -1,0 +1,32 @@
+﻿@using System.Text
+@model ImageGallery.Models.ImageModel
+
+@{
+    ViewData["Title"] = "Image";
+}
+
+<h1>@Model.Name</h1>
+
+<div class="row">
+    <div class="col-12">
+        <img src="@Model.Url" class="w-100 rounded"/>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col">
+        <i class="font-weight-bold">Tags: </i>
+        @{
+            @foreach (var tag in @Model.Tags)
+            {
+                <a asp-action="index" asp-controller="home" asp-route-tag="@tag.Id">@tag.Name</a>
+            }
+        }
+    </div>
+    <div class="col">
+        <a asp-action="Edit" asp-route-id="@Model.Id">Edit tags</a>
+    </div>
+</div>
+<div class="row">
+    @Html.ActionLink("Delete", "Delete", new {  id = Model.Id  }) |
+    <a asp-action="Index" asp-controller="Home">Back to List</a>
+</div>

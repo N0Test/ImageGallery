@@ -9,6 +9,6 @@ namespace ImageGallery.DAL.Entities
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public virtual IList<ImageInTagEntity> ImageInTags { get; set; }
+        public virtual IList<ImageEntity> Images { get; set; } = new List<ImageEntity>();
     }
 }
