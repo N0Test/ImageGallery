@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ImageGallery.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20220515194930_Initialization1")]
-    partial class Initialization1
+    [Migration("20220528102701_InitialInit")]
+    partial class InitialInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,6 +33,18 @@ namespace ImageGallery.Migrations
                     b.HasIndex("TagsId");
 
                     b.ToTable("ImageEntityTagEntity");
+
+                    b.HasData(
+                        new
+                        {
+                            ImagesId = 1,
+                            TagsId = 1
+                        },
+                        new
+                        {
+                            ImagesId = 1,
+                            TagsId = 2
+                        });
                 });
 
             modelBuilder.Entity("ImageGallery.DAL.Entities.ImageEntity", b =>
@@ -57,7 +69,7 @@ namespace ImageGallery.Migrations
                         {
                             Id = 1,
                             Name = "Palm trees",
-                            Url = "https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg"
+                            Url = "/images/76fe10e5-aeb0-40d4-9e15-2ae66ba6ba3c-PalmTrees.jpg"
                         });
                 });
 
