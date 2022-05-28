@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ImageGallery.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20220515194930_Initialization1")]
-    partial class Initialization1
+    [Migration("20220528094652_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,6 +33,18 @@ namespace ImageGallery.Migrations
                     b.HasIndex("TagsId");
 
                     b.ToTable("ImageEntityTagEntity");
+
+                    b.HasData(
+                        new
+                        {
+                            ImagesId = 1,
+                            TagsId = 1
+                        },
+                        new
+                        {
+                            ImagesId = 1,
+                            TagsId = 2
+                        });
                 });
 
             modelBuilder.Entity("ImageGallery.DAL.Entities.ImageEntity", b =>

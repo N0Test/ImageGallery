@@ -31,6 +31,18 @@ namespace ImageGallery.Migrations
                     b.HasIndex("TagsId");
 
                     b.ToTable("ImageEntityTagEntity");
+
+                    b.HasData(
+                        new
+                        {
+                            ImagesId = 1,
+                            TagsId = 1
+                        },
+                        new
+                        {
+                            ImagesId = 1,
+                            TagsId = 2
+                        });
                 });
 
             modelBuilder.Entity("ImageGallery.DAL.Entities.ImageEntity", b =>
