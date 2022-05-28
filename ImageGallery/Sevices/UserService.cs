@@ -37,6 +37,7 @@ namespace ImageGallery.Sevices
 
             if(item.Id == default)
             {
+                item.Role = RoleMapper.Create(_dbContext.Roles.Find(1));
                 entity = UserMapper.Create(item);
                 entity = _dbContext.Users.Add(entity).Entity;
                 _dbContext.SaveChanges();

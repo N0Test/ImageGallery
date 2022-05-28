@@ -3,6 +3,7 @@
 
 @{
     ViewData["Title"] = "Image";
+    bool isAuth = Context.Session.Keys.Contains("tokenKey");
 }
 
 <h1>@Model.Name</h1>
@@ -22,14 +23,20 @@
             }
         }
     </div>
-    <div class="col">
-        <a asp-action="Edit" asp-route-id="@Model.Id">Edit tags</a>
-    </div>
+    @if (isAuth)
+    {
+        <div class="col">
+            <a asp-action="Edit" asp-route-id="@Model.Id">Edit tags</a>
+        </div>
+    }
 </div>
 <div class="row">
     <div class="col">
         @Html.ActionLink("Download", "Download", new {  fileName = Model.Url  }) |
-        @Html.ActionLink("Delete", "Delete", new {  id = Model.Id  }) |
-        <a asp-action="Index" asp-controller="Home">Back to List</a>
+        <a asp-action="Index" asp-controller="Home">Back to List</a> |
+        @if(isAuth)
+        {
+            @Html.ActionLink("Delete", "Delete", new {  id = Model.Id  })
+        }
     </div>
 </div>

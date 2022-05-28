@@ -4,7 +4,7 @@ namespace ImageGallery.Sevices
 {
     public interface IAuthorizationService
     {
-        UserModel LogIn(string email, string password);
-        UserModel Registration(UserModel user);
+        TokenModel LogIn(UserModel model);
+        TokenModel Registration(UserModel user);
     }
 }

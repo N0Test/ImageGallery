@@ -22,10 +22,7 @@
     @foreach (var item in Model) {
             <tr>
                 <td>
-                   <input type="checkbox" value="@item.Id" name="tags" 
-                    @if(image.Tags.Any(tag => tag.Id == item.Id)) {
-                            @Html.Display("checked")
-                    }/>
+                    @Html.CheckBox("tags", image.Tags.Any(tag => tag.Id == item.Id), new { Value = item.Id})
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)

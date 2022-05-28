@@ -27,7 +27,7 @@ namespace ImageGallery.Sevices.Mapper
                 Email = model.Email,
                 Name = model.Name,
                 Password = model.Password,
-                Role = RoleMapper.Create(model.Role),
+                RoleId = model.Role.Id,
             };
         }
 
